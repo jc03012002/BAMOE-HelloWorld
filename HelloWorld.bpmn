@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_GCwvoJUZED23hJkWekWiCQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_myTimerItem" structureRef="String"/>
+  <bpmn2:collaboration id="_15AF608E-7FEF-4B44-9363-861A129330BC" name="Default Collaboration">
+    <bpmn2:participant id="_4147BE07-2E73-48B9-BE3F-CC739C21377C" name="Pool Participant" processRef="HelloWorld"/>
+  </bpmn2:collaboration>
+  <bpmn2:process id="HelloWorld" drools:packageName="com.example" drools:version="1.0" drools:adHoc="false" name="HelloWorld" isExecutable="true" processType="Public">
+    <bpmn2:property id="myTimer" itemSubjectRef="_myTimerItem" name="myTimer"/>
+    <bpmn2:sequenceFlow id="_EBD0CF7E-9E83-47A8-80EC-BE5E27C74A68" sourceRef="_099458B5-9998-4C7A-A329-DB142A0B1A11" targetRef="_28D8F4C9-8920-46A8-9189-36D04594B606"/>
+    <bpmn2:sequenceFlow id="_B4157F3A-A893-4362-9BC5-5E11B2161D07" sourceRef="_C9C1ECE5-D21B-41B8-B707-634BA1A3A413" targetRef="_099458B5-9998-4C7A-A329-DB142A0B1A11"/>
+    <bpmn2:sequenceFlow id="_297F41A1-A872-4993-9B2E-488C845502A1" sourceRef="_8B664867-3B74-47FE-9B76-0FD979D6E389" targetRef="_C9C1ECE5-D21B-41B8-B707-634BA1A3A413"/>
+    <bpmn2:endEvent id="_28D8F4C9-8920-46A8-9189-36D04594B606">
+      <bpmn2:incoming>_EBD0CF7E-9E83-47A8-80EC-BE5E27C74A68</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:intermediateCatchEvent id="_099458B5-9998-4C7A-A329-DB142A0B1A11">
+      <bpmn2:incoming>_B4157F3A-A893-4362-9BC5-5E11B2161D07</bpmn2:incoming>
+      <bpmn2:outgoing>_EBD0CF7E-9E83-47A8-80EC-BE5E27C74A68</bpmn2:outgoing>
+      <bpmn2:timerEventDefinition>
+        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression">#{myTimer}</bpmn2:timeDuration>
+      </bpmn2:timerEventDefinition>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:scriptTask id="_C9C1ECE5-D21B-41B8-B707-634BA1A3A413" name="Task" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Task]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_297F41A1-A872-4993-9B2E-488C845502A1</bpmn2:incoming>
+      <bpmn2:outgoing>_B4157F3A-A893-4362-9BC5-5E11B2161D07</bpmn2:outgoing>
+      <bpmn2:script>kcontext.setVariable("myTimer", (String) "PT2M");
+System.out.println("Hello World!");</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:startEvent id="_8B664867-3B74-47FE-9B76-0FD979D6E389">
+      <bpmn2:outgoing>_297F41A1-A872-4993-9B2E-488C845502A1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="HelloWorld">
+      <bpmndi:BPMNShape id="shape__8B664867-3B74-47FE-9B76-0FD979D6E389" bpmnElement="_8B664867-3B74-47FE-9B76-0FD979D6E389">
+        <dc:Bounds height="56" width="56" x="209" y="110"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__C9C1ECE5-D21B-41B8-B707-634BA1A3A413" bpmnElement="_C9C1ECE5-D21B-41B8-B707-634BA1A3A413">
+        <dc:Bounds height="102" width="154" x="416" y="85"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__099458B5-9998-4C7A-A329-DB142A0B1A11" bpmnElement="_099458B5-9998-4C7A-A329-DB142A0B1A11">
+        <dc:Bounds height="56" width="56" x="753" y="109"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__28D8F4C9-8920-46A8-9189-36D04594B606" bpmnElement="_28D8F4C9-8920-46A8-9189-36D04594B606">
+        <dc:Bounds height="56" width="56" x="1033" y="106"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge_shape__8B664867-3B74-47FE-9B76-0FD979D6E389_to_shape__C9C1ECE5-D21B-41B8-B707-634BA1A3A413" bpmnElement="_297F41A1-A872-4993-9B2E-488C845502A1">
+        <di:waypoint x="237" y="138"/>
+        <di:waypoint x="416" y="136"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__C9C1ECE5-D21B-41B8-B707-634BA1A3A413_to_shape__099458B5-9998-4C7A-A329-DB142A0B1A11" bpmnElement="_B4157F3A-A893-4362-9BC5-5E11B2161D07">
+        <di:waypoint x="493" y="136"/>
+        <di:waypoint x="753" y="137"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__099458B5-9998-4C7A-A329-DB142A0B1A11_to_shape__28D8F4C9-8920-46A8-9189-36D04594B606" bpmnElement="_EBD0CF7E-9E83-47A8-80EC-BE5E27C74A68">
+        <di:waypoint x="781" y="137"/>
+        <di:waypoint x="1033" y="134"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters/>
+          <bpsim:ElementParameters elementRef="_8B664867-3B74-47FE-9B76-0FD979D6E389">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_C9C1ECE5-D21B-41B8-B707-634BA1A3A413">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_GCwvoJUZED23hJkWekWiCQ</bpmn2:source>
+    <bpmn2:target>_GCwvoJUZED23hJkWekWiCQ</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
